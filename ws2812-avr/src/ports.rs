@@ -34,7 +34,7 @@ macro_rules! static_pins {
 	    impl StaticPort for attiny_hal::pac::$portt {
 		#[inline(always)]
 		unsafe fn read() -> u8 {
-		    (*Self::PTR).$portn.read().bits()
+		    (*Self::PTR).$portn().read().bits()
 		}
 
 		#[inline(always)]

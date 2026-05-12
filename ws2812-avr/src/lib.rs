@@ -28,6 +28,7 @@ pub use color::*;
 use crate::util::asm::{asm_block, branch_not_equal, dec, ld_immediate, lsl, skip_if_bit_set};
 use avr_hal_generic::port::{mode::Output, Pin};
 use avr_hal_generic::avr_device::interrupt::free;
+use avr_hal_generic::hal::delay::DelayNs;
 use core::convert::Infallible;
 use core::marker::PhantomData;
 use core::mem::size_of;
@@ -36,7 +37,7 @@ use util::time::TimeVal;
 use util::{time, NopBlock, NopGen};
 
 mod consts {
-    use attiny_hal::{clock::Clock, DefaultClock};
+    use attiny_hal::{clock::Clock};
 
     /** The number of fixed cycles (non-nop instructions) consumed by
     the instructions of the loop after enabling the pin until it is
@@ -101,7 +102,7 @@ mod consts {
     pub const FIXED_CYCLES_TOTAL: u8 = 8;
 
     /// Holds the clock speed of the CPU
-    pub const F_CPU: u32 = DefaultClock::FREQ;
+    pub const F_CPU: u32 = attiny_hal::clock::MHz16::FREQ;
     pub(crate) const NANOS_IN_SECOND: u64 = 1000000000;
 }
 
@@ -276,7 +277,8 @@ impl<Pin: StaticPin, Ts: TypedTimings, Order: ColorOrder> WS2812<Pin, Ts, Order>
             }
         });
 
-        attiny_hal::delay_us(Ts::Rst::MICROS as u32);
+        let mut delay = attiny_hal::delay::Delay::<attiny_hal::clock::MHz16>::new();
+        delay.delay_us(Ts::Rst::MICROS as u32);
     }
 }
 

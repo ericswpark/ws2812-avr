@@ -31,7 +31,7 @@ macro_rules! static_pins {
 	}
     ),*} => {
 	$(
-	    impl StaticPort for arduino_hal::pac::$portt {
+	    impl StaticPort for attiny_hal::pac::$portt {
 		#[inline(always)]
 		unsafe fn read() -> u8 {
 		    (*Self::PTR).$portn.read().bits()
@@ -44,9 +44,9 @@ macro_rules! static_pins {
 	    }
 
 	    $(
-		impl StaticPin for arduino_hal::hal::port::$pin {
+		impl StaticPin for attiny_hal::hal::port::$pin {
 		    const PIN_BIT_INDEX: u8 = $index;
-		    type Port = arduino_hal::pac::$portt;
+		    type Port = attiny_hal::pac::$portt;
 		}
 	    )*
 	)*

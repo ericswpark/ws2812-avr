@@ -36,7 +36,7 @@ use util::time::TimeVal;
 use util::{time, NopBlock, NopGen};
 
 mod consts {
-    use arduino_hal::{clock::Clock, DefaultClock};
+    use attiny_hal::{clock::Clock, DefaultClock};
 
     /** The number of fixed cycles (non-nop instructions) consumed by
     the instructions of the loop after enabling the pin until it is
@@ -276,7 +276,7 @@ impl<Pin: StaticPin, Ts: TypedTimings, Order: ColorOrder> WS2812<Pin, Ts, Order>
             }
         });
 
-        arduino_hal::delay_us(Ts::Rst::MICROS as u32);
+        attiny_hal::delay_us(Ts::Rst::MICROS as u32);
     }
 }
 

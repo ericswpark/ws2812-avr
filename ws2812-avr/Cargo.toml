@@ -18,4 +18,4 @@ attiny88 = []
 
 [dependencies]
 avr-hal-generic = {git = "https://github.com/rahix/avr-hal", rev = "3e362624547462928a219c40f9ea8e3a64f21e5f"}
-arduino-hal = {git = "https://github.com/rahix/avr-hal", rev = "3e362624547462928a219c40f9ea8e3a64f21e5f"}
+attiny-hal = {git = "https://github.com/rahix/avr-hal", rev = "3e362624547462928a219c40f9ea8e3a64f21e5f"}

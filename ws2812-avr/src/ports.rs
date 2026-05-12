@@ -39,7 +39,7 @@ macro_rules! static_pins {
 
 		#[inline(always)]
 		unsafe fn write(value: u8) {
-		    (*Self::PTR).$portn.write(|f| f.bits(value));
+		    (*Self::PTR).$portn().write(|f| f.bits(value));
 		}
 	    }
 

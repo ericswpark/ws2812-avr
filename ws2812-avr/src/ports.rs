@@ -44,7 +44,7 @@ macro_rules! static_pins {
 	    }
 
 	    $(
-		impl StaticPin for attiny_hal::hal::port::$pin {
+		impl StaticPin for attiny_hal::port::$pin {
 		    const PIN_BIT_INDEX: u8 = $index;
 		    type Port = attiny_hal::pac::$portt;
 		}
